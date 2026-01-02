@@ -1,15 +1,21 @@
 {
   "name": "local-to-cloud-sync",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/main.js",
   "scripts": {
+    "start": "npm run build && electron .",
+    "dev": "npm run build && NODE_ENV=development electron .",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": ["notes", "electron", "desktop", "sync"],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "A simple local to cloud notes sync desktop app",
   "devDependencies": {
-    "electron": "^39.2.7"
+    "@types/node": "^20.0.0",
+    "electron": "^39.2.7",
+    "typescript": "^5.0.0"
   }
 }

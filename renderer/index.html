@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local to Cloud Notes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <h1>📝 Local to Cloud Notes</h1>
+            <button id="new-note-btn" class="btn btn-primary">New Note</button>
+        </header>
+
+        <!-- Main content -->
+        <div class="main-content">
+            <!-- Notes list sidebar -->
+            <aside class="notes-sidebar">
+                <div class="sidebar-header">
+                    <h2>Your Notes</h2>
+                    <span id="notes-count" class="notes-count">0 notes</span>
+                </div>
+                <div id="notes-list" class="notes-list">
+                    <!-- Notes will be populated here -->
+                </div>
+            </aside>
+
+            <!-- Editor panel -->
+            <main class="editor-panel">
+                <div id="note-editor" class="note-editor">
+                    <div class="editor-header">
+                        <input type="text" id="note-title" placeholder="Note title..." class="note-title-input">
+                        <div class="editor-actions">
+                            <button id="save-note-btn" class="btn btn-secondary">Save</button>
+                            <button id="delete-note-btn" class="btn btn-danger" style="display: none;">Delete</button>
+                        </div>
+                    </div>
+                    <textarea id="note-content" placeholder="Start writing your note..." class="note-content-textarea"></textarea>
+                </div>
+
+                <!-- Empty state -->
+                <div id="empty-state" class="empty-state">
+                    <div class="empty-state-content">
+                        <h3>Welcome to Local to Cloud Notes!</h3>
+                        <p>Create your first note or select an existing one to get started.</p>
+                        <button id="create-first-note-btn" class="btn btn-primary">Create Your First Note</button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
