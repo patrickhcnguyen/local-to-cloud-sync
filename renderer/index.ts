@@ -5,6 +5,7 @@ interface Note {
   title: string;
   content: string;
   createdAt: Date;
+  updatedAt: Date;
 }
 
 class NotesApp {
@@ -127,7 +128,8 @@ class NotesApp {
       id: Date.now(),
       title: '',
       content: '',
-      createdAt: new Date()
+      createdAt: new Date(),
+      updatedAt: new Date(),
     };
 
     this.notes.unshift(newNote);
