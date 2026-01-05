@@ -1,8 +1,8 @@
 export interface Note {
-    id: number;
+    id: string;
     title: string;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: number;
+    updatedAt: number;
 }
 
 export interface NoteWithContent extends Note {

@@ -23,7 +23,7 @@ export function runSchema(schema: string) {
     });
 }
 
-export function insertNote(note: Note) {
+export function insertNote(note: NoteWithContent) {
     return new Promise<void>((resolve, reject) => {
         db.run(
             `INSERT INTO notes (id, title, content, created_at, updated_at) VALUES(?, ?, ?, ?, ?)`,
@@ -31,25 +31,25 @@ export function insertNote(note: Note) {
                 note.id,
                 note.title,
                 note.content,
-                note.createdAt.getTime(),   
-                note.updatedAt.getTime(),
+                note.createdAt,
+                note.updatedAt,
             ],
             (err) => (err ? reject(err) : resolve())
         );
     });
 }
 
-export function updateNoteContent(id: number, content: string, updatedAt: Date) {
+export function updateNoteContent(id: string, content: string, updatedAt: number) {
     return new Promise<void>((resolve, reject) => {
         db.run(
             `UPDATE notes SET content = ?, updated_at = ? WHERE id = ?`,
-            [content, updatedAt.getTime(), id],
+            [content, updatedAt, id],
             err => (err ? reject(err) : resolve())
         );
     });
 }
 
-export function deleteNote(id: number) {
+export function deleteNote(id: string) {
     return new Promise<void>((resolve, reject) => {
         db.run(
             `DELETE FROM notes WHERE id = ?`,
@@ -69,7 +69,7 @@ export function fetchAllNotes() {
     });
 }
 
-export function fecthNoteByID(id: number) {
+export function fecthNoteByID(id: string) {
     return new Promise<NoteWithContent | undefined>((resolve, reject) => {
         db.get(
             `SELECT * FROM notes WHERE id = ?`,
