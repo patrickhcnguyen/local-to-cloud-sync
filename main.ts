@@ -7,6 +7,8 @@
 
 import { app, BrowserWindow, ipcMain } from 'electron';
 import * as path from 'path';
+import { init as initEngine } from './engine/init';
+import { saveNote, loadNotes, removeNote } from './engine/notesEngine';
 
 let mainWindow: BrowserWindow | null = null;
 
@@ -35,8 +37,16 @@ function createWindow(): void {
   });
 }
 
-app.whenReady().then(createWindow);
-
+app.on('ready', async () => {
+  try {
+    console.log('Initializing engine...');
+    await initEngine();
+    console.log('Engine initialized, creating window...');
+    createWindow();
+  } catch (error) {
+    console.error('Failed to initialize engine:', error);
+  }
+});
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
@@ -51,22 +61,13 @@ app.on('activate', () => {
 
 // IPC handlers for notes operations
 ipcMain.handle('save-note', async (event, noteData) => {
-  // TODO: Implement note saving logic
-  console.log('Saving note:', noteData);
-  return { success: true, id: Date.now() };
+  return await saveNote(noteData);
 });
 
 ipcMain.handle('load-notes', async () => {
-  // TODO: Implement notes loading logic
-  console.log('Loading notes');
-  return [
-    { id: 1, title: 'Sample Note 1', content: 'This is a sample note', createdAt: new Date() },
-    { id: 2, title: 'Sample Note 2', content: 'Another sample note', createdAt: new Date() }
-  ];
+  return await loadNotes();
 });
 
 ipcMain.handle('delete-note', async (event, noteId) => {
-  // TODO: Implement note deletion logic
-  console.log('Deleting note:', noteId);
-  return { success: true };
+  return await removeNote(noteId);
 });

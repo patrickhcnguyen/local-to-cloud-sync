@@ -13,7 +13,7 @@ export function openDB() {
     }
 
     db = new sqlite3.Database(DB_PATH);
-    db.run(fs.readFileSync(path.join(__dirname, 'schema.sql'), 'utf8'));
+    db.exec(fs.readFileSync(path.join(__dirname, 'schema.sql'), 'utf8'));
     return db;
 }
 

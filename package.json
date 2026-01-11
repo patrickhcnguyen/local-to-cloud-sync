@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "dist/main.js",
   "scripts": {
-    "start": "npm run build && electron .",
-    "dev": "npm run build && NODE_ENV=development electron .",
-    "build": "tsc",
+    "start": "npm run build && npx electron dist/main.js",
+    "dev": "npm run build && NODE_ENV=development npx electron .",
+    "build": "tsc && mkdir -p dist/engine/storage && cp engine/storage/schema.sql dist/engine/storage/ && cp renderer/index.html dist/renderer/ && cp renderer/styles.css dist/renderer/",
     "build:watch": "tsc --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
